@@ -5,20 +5,19 @@ import com.envyful.api.command.annotate.executor.Argument;
 import com.envyful.api.command.annotate.executor.CommandProcessor;
 import com.envyful.api.command.annotate.executor.Completable;
 import com.envyful.api.command.annotate.executor.Sender;
+import com.envyful.api.command.annotate.permission.Permissible;
 import com.envyful.api.forge.command.completion.player.PlayerTabCompleter;
 import com.envyful.api.forge.player.ForgeEnvyPlayer;
 import com.envyful.api.platform.Messageable;
 import com.envyful.api.reforged.battle.BattleBuilder;
 import com.naudodev.ndbattletorn.forge.NDBattleTorn;
 import com.naudodev.ndbattletorn.forge.config.BattleTornConfig;
-import com.naudodev.ndbattletorn.forge.service.BattleInfoService;
 import com.naudodev.ndbattletorn.forge.utils.BattleUtils;
 import com.pixelmonmod.pixelmon.api.battles.BattleEndCause;
 import com.pixelmonmod.pixelmon.api.pokemon.Pokemon;
 import com.pixelmonmod.pixelmon.api.storage.PlayerPartyStorage;
 import com.pixelmonmod.pixelmon.api.storage.StorageProxy;
 import com.pixelmonmod.pixelmon.battles.BattleRegistry;
-import com.pixelmonmod.pixelmon.battles.controller.BattleController;
 import com.pixelmonmod.pixelmon.battles.controller.participants.PlayerParticipant;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import java.util.List;
@@ -26,6 +25,7 @@ import java.util.List;
 @Command(
         value = "battletorn"
 )
+@Permissible(value = "nd.battlemod.mod")
 public class BattleTornCommand {
 
     @CommandProcessor
