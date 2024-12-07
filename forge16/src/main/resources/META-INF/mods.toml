@@ -1,0 +1,29 @@
+modLoader="javafml"
+loaderVersion="[36,)"
+license="MIT"
+issueTrackerURL="https://github.com/naudofp"
+
+[[mods]]
+modId="ndbattletorn"
+version="2.9.1"
+displayName="ND Tournament battles"
+displayURL="https://github.com/naudofp"
+credits="https://github.com/naudofp"
+authors="https://github.com/naudofp"
+description='''
+Tournament battles
+'''
+
+[[dependencies.ndbattletorn]]
+modId="forge"
+mandatory=true
+versionRange="[36,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.ndbattletorn]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.16.5,1.17)"
+ordering="NONE"
+side="BOTH"

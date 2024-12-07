@@ -1,0 +1,69 @@
+plugins {
+    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
+    id("com.github.johnrengelman.shadow") version "8.1.1"
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(11)
+forgeVersion = "1.16.5"
+
+minecraft {
+    mappings channel: 'official', version: '1.16.5'
+}
+
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+repositories {}
+
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.16.5-36.2.39'
+    implementation 'pixelmon:Pixelmon-1.16.5-9.1.11-server:9.1.11'
+
+    compileOnly "com.envyful.papi:api:2.0.5"
+
+    implementation group: 'org.spongepowered', name: 'configurate-yaml', version: '4.0.0'
+
+    shadow group: 'com.cronutils', name: 'cron-utils', version: '9.2.0'
+
+    shadow (group: 'com.envyful.api', name: 'commons', version: '7.2.3')
+    shadow (group: 'com.envyful.api', name: 'sqlite', version: '7.2.3')
+    shadow (group: 'com.envyful.api', name: 'forge16', version: '7.2.3') {
+        transitive = false
+    }
+    shadow (group: 'com.envyful.api', name: 'reforged16', version: '7.2.3') {
+        transitive = false
+    }
+}
+
+shadowJar {
+    configurations = [project.configurations.shadow]
+    setArchiveClassifier('')
+    setArchiveBaseName("${rootProject.name}-Forge")
+
+    relocate('org.spongepowered.configurate', 'com.naudodev.ndbattletorn.shade.configurate')
+    relocate('org.yaml.snakeyaml', 'com.naudodev.ndbattletorn.shade.snakeyaml')
+    relocate('io.leangen.geantyref', 'com.naudodev.ndbattletorn.shade.geantyref')
+    relocate('com.zaxxer', 'com.naudodev.ndbattletorn.shade.hikari')
+    relocate('org.slf4j', 'com.naudodev.ndbattletorn.shade.slf4j')
+    relocate('com.envyful.api', 'com.naudodev.ndbattletorn.shade.envy.api')
+    relocate('org.bstats', 'com.naudodev.ndbattletorn.shade.bstats')
+    relocate('io.netty', 'com.naudodev.ndbattletorn.shade.netty')
+    relocate('io.lettuce', 'com.naudodev.ndbattletorn.shade.lettuce')
+    relocate('com.cronutils', 'com.naudodev.ndbattletorn.shade.cronutils')
+    relocate('com.cronutils', 'com.naudodev.ndbattletorn.shade.cronutils')
+    relocate('com.sun.el', 'com.naudodev.ndbattletorn.shade.sun.el')
+    relocate('org.reactivestreams', 'com.naudodev.ndbattletorn.shade.reactivestreams')
+    relocate('reactor', 'com.naudodev.ndbattletorn.shade.reactor')
+
+    exclude "com/google/**"
+    exclude "javax/**"
+    exclude "**/module-info.class"
+    exclude "**/*.properties"
+    exclude "**/*.xml"
+    exclude "META-INF/versions/9/**"
+    exclude "META-INF/native-image/**"
+    exclude "META-INF/services/**"
+}
+
+jar.finalizedBy('shadowJar')
+shadowJar.finalizedBy('reobfJar')
+build.finalizedBy('versionedRelease')
