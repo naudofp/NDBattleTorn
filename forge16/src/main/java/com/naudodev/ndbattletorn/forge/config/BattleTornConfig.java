@@ -10,16 +10,16 @@ import org.spongepowered.configurate.objectmapping.meta.Comment;
 public class BattleTornConfig extends AbstractYamlConfig {
 
     @Comment("Mensagem de vitória")
-    private String messageWin = "GANHOU!";
+    private String messageWin = "ganhou a partida!";
 
     @Comment("Comando que será executado para o jogador vencedor da batalha, utilize %player% para informar o player e %dimension% para o mundo.")
-    private String commandWinner = "execute in %dimension% run tp %player% 20 20 20";
+    private String commandWinner = "execute in %dimension% run tp %player% 560 69 1233\n";
 
     @Comment("Nome do mundo que poderá ser utilizado no commandWinner ou commandLooser")
-    private String dimension = "minecraft:the_nether";
+    private String dimension = "minecraft:world/plavania";
 
     @Comment("Comando que será executado para o jogador perdedor da batalha, utilize %player% para informar o player e %dimension% para o mundo.")
-    private String commandLooser = "kill %player%";
+    private String commandLooser = "execute in %dimension% run tp %player% 560 69 1233\n";
 
     public BattleTornConfig() {
         super();

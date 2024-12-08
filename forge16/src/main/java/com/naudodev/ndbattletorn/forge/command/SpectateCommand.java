@@ -9,7 +9,6 @@ import com.envyful.api.platform.PlatformProxy;
 import com.pixelmonmod.pixelmon.api.util.helpers.NetworkHelper;
 import com.pixelmonmod.pixelmon.battles.BattleRegistry;
 import com.pixelmonmod.pixelmon.battles.api.rules.BattleRuleRegistry;
-import com.pixelmonmod.pixelmon.battles.controller.log.BattleLog;
 import com.pixelmonmod.pixelmon.battles.controller.participants.PixelmonWrapper;
 import com.pixelmonmod.pixelmon.battles.controller.participants.Spectator;
 import com.pixelmonmod.pixelmon.client.gui.battles.PixelmonClientData;
@@ -35,6 +34,11 @@ public class SpectateCommand {
             return;
         }
 
+        if (battle.hasSpectator(sender.getParent())) {
+            PlatformProxy.sendMessage(sender, List.of("&c(!) Você já está assistindo uma batalha"));
+            return;
+        }
+
         var watchedPlayer = battle.getPlayer(playerToWatch.getParent());
 
         NetworkHelper.sendPacket(new StartBattlePacket(battle.battleIndex, battle.getBattleType(watchedPlayer), battle.rules), sender.getParent());
@@ -52,6 +56,4 @@ public class SpectateCommand {
         battle.addSpectator(new Spectator(sender.getParent(), playerToWatch.getName()));
         PlatformProxy.sendMessage(sender, List.of("&a&l(!) &aVocê está assistindo " + playerToWatch.getName()));
     }
-
-
 }
