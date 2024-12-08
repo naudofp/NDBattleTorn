@@ -56,20 +56,19 @@ public class BattleTornCommand {
         PlayerParticipant participant2 = new PlayerParticipant(player2.getParent(), getPlayerPokemon(player2.getParent()), 0);
 
         BattleRules rules = new BattleRules();
-        rules.set(BattleRuleRegistry.RAISE_TO_CAP, false);
         rules.set(BattleRuleRegistry.FULL_HEAL, false);
         rules.set(BattleRuleRegistry.TURN_TIME, 60);
-        rules.set(BattleRuleRegistry.TEAM_SELECT, 6);
         rules.set(BattleRuleRegistry.TEAM_PREVIEW, true);
 
         TeamSelectionRegistry.builder()
-                .members(
-                        participant1.getStorage(),
-                        participant2.getStorage()
-                )
                 .notCloseable()
+                .members(
+                    participant1.getStorage(),
+                    participant2.getStorage()
+                )
                 .battleRules(rules)
                 .battleStartConsumer(battleController -> {
+                    battleController.clearHurtTimer();
                     battleController.addFunctionAtEvent(BattleEndEvent.class, (event, bc) -> {
                         if (event.getCause() == BattleEndCause.NORMAL) {
                             if (isLivePokemon(player1.getParent())) {
