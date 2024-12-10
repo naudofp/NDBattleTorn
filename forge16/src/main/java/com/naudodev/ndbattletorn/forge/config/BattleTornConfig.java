@@ -10,7 +10,7 @@ import org.spongepowered.configurate.objectmapping.meta.Comment;
 public class BattleTornConfig extends AbstractYamlConfig {
 
     @Comment("Mensagem de vitória")
-    private String messageWin = "ganhou a partida!";
+    private String messageWin = "&e&l[TORNEIO] &f%player% ganhou a partida!";
 
     @Comment("Comando que será executado para o jogador vencedor da batalha, utilize %player% para informar o player e %dimension% para o mundo.")
     private String commandWinner = "execute in %dimension% run tp %player% 560 69 1233\n";
