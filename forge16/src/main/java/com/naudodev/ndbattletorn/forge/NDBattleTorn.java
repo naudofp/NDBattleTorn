@@ -51,6 +51,10 @@ public class NDBattleTorn {
         return instance;
     }
 
+    public static ForgePlayerManager getPlayerManager() {
+        return instance.playerManager;
+    }
+
     public void reloadConfig() {
         try {
             this.config = YamlConfigFactory.getInstance(BattleTornConfig.class);
