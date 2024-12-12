@@ -43,6 +43,8 @@ public class NDBattleTorn {
         PlatformProxy.setHandler(ForgePlatformHandler.getInstance());
         PlatformProxy.setPlayerManager(this.playerManager);
         PlatformProxy.setTextFormatter(ITextComponentTextFormatter.getInstance());
+
+        instance = this;
     }
 
     public static NDBattleTorn getInstance() {

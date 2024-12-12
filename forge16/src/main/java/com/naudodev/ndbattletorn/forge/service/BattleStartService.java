@@ -128,12 +128,12 @@ public class BattleStartService {
                     BattleUtils.executeCommand(this.player1, config.getCommandWinner(), config.getDimension());
                     BattleUtils.executeCommand(this.player2, config.getCommandLooser(), config.getDimension());
                 } else {
+                    BattleUtils.endBattleSound(NDBattleTorn.getPlayerManager().getOnlinePlayers());
                     BattleUtils.winMessage(this.player2, config);
                     BattleUtils.executeCommand(this.player2, config.getCommandWinner(), config.getDimension());
                     BattleUtils.executeCommand(this.player1, config.getCommandLooser(), config.getDimension());
                 }
             } else {
-                BattleUtils.endBattleSound(List.of((ForgeEnvyPlayer) sender));
                 battleInfoService.sendBattleLogToSender(bc, terrainPLayers, globalStatusString);
             }
             return null;
